@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
+
 const express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io')(server),
-    port = 80,
+    port = process.env.PORT || 7860,
     url  = 'http://localhost:' + port + '/';
     
-// Can access subdomain environment variables from process.env
-// Note: the SUBDOMAIN variable will always be defined for a deployed app
-if(process.env.SUBDOMAIN)
-{
-  url = 'http://' + process.env.SUBDOMAIN + '/';
+// Can access environment variables from process.env
+if(process.env.SPACE_ID) {
+    url = `https://${process.env.SPACE_ID}.hf.space/`;
+}
+
+// Verify Hugging Face API key is available
+if (!process.env.HUGGING_FACE_API_KEY) {
+    console.warn('Warning: HUGGING_FACE_API_KEY is not set');
 }
 
 // Tell express to serve local files

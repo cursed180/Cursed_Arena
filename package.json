@@ -1,16 +1,18 @@
 {
-  "name": "nodeapps-socket.io",
+  "name": "cursed-arena",
   "author": {
     "name": "Ryan Doubrava",
     "email": "rjdoubrava@gmail.com"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "version": "0.1.3-131",
   "dependencies": {
-    "socket.io": "^4.7.4",
-    "express": "^4.18.2"
+    "dotenv": "^16.4.7",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.4"
   },
   "engines": {
     "node": ">=14.0.0"
