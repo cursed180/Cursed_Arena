@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Impact Game</title>
+	<style type="text/css">
+		html,body {
+			background-color: #000;
+			color: #fff;
+			font-family: helvetica, arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			font-size: 12pt;
+		}
+		
+#canvas {
+            position: relative;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border: 1px solid #555;
+            background-color: red;
+            width:320;
+            height:320;
+        }
+	</style>
+	<meta name="viewport" content="width=device-width; 
+		initial-scale=1; maximum-scale=1; user-scalable=0;"/>
+	
+	<!-- This meta tag ensures that the toolbar at the bottom of the browser 
+		is hidden when this page is accessed frome the Home Screen. -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<!-- The icon that should be used when added to the Home Screen -->
+	<link rel="apple-touch-icon" href="media/touch-icon.png"/>
+
+	<script type="text/javascript" src="game.min.js"></script>
+<script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<!-- This will scroll the viewport, so that the navigation bar is no longer visible -->
+<body onload="setTimeout(function(){window.scrollTo(0,0);},1);">
+	<div id="game">
+		<canvas id="canvas"></canvas>
+	</div>
+    </body>
+</html>
+
+
