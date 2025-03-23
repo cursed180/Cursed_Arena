@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-// Express 3 requires that you instantiate a `http.Server` to attach socket.io to first
-var express = require('express'),
+const express = require('express'),
     app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
+    io = require('socket.io')(server),
     port = 80,
     url  = 'http://localhost:' + port + '/';
     
@@ -25,18 +24,15 @@ console.log(url);
 //default to index.html
 app.get('/', function (req, res)
 {
-  res.sendfile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 //Socket.io emits this event when a connection is made.
-io.sockets.on('connection', function (socket)
+io.on('connection', function (socket)
 {
   // Emit a message to send it to the client.
   socket.emit('ping', { msg: 'Connected successfully via socket.io.' });
   
-  //Load first game level
-  io.set('log level', 1);
-
   // Print messages from the client.
   socket.on('pong', function (data){
               console.log(data.msg);
@@ -47,13 +43,11 @@ io.sockets.on('connection', function (socket)
 		socket.broadcast.emit('join', {remoteId:socket.id});
 		
 		//send all existing clients to new
-		for(var i in io.sockets.sockets)
-                {
-			socket.emit('join', {remoteId: i});
-		}	
+		const sockets = Array.from(io.sockets.sockets.values());
+		sockets.forEach(s => {
+			socket.emit('join', {remoteId: s.id});
+		});	
             });
-
-	
 
 	/**
 	 * universal broadcasting method
@@ -66,10 +60,9 @@ io.sockets.on('connection', function (socket)
 	 * announcing to everyone!
 	 */
 	socket.on('announce', function(data) {
-		io.sockets.emit('announced', data);
+		io.emit('announced', data);
 	});
 
-	
 	/**
 	 * disconnecting
 	 */
