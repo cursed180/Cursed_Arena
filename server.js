@@ -7,11 +7,11 @@ const express = require('express'),
     port = 80,
     url  = 'http://localhost:' + port + '/';
     
-// Can access nodejitsu enviroment variables from process.env
-// Note: the SUBDOMAIN variable will always be defined for a nodejitsu app
+// Can access subdomain environment variables from process.env
+// Note: the SUBDOMAIN variable will always be defined for a deployed app
 if(process.env.SUBDOMAIN)
 {
-  url = 'http://' + process.env.SUBDOMAIN + '.jit.su/';
+  url = 'http://' + process.env.SUBDOMAIN + '/';
 }
 
 // Tell express to serve local files
