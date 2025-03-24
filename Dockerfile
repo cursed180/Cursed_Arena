@@ -9,6 +9,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN chmod +x server.js
 
 # Git configuration
 RUN git config --global user.name "Cursed180"
