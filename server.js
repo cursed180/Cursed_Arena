@@ -6,8 +6,9 @@ const express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io')(server),
-    port = process.env.PORT || 7860,
-    url  = 'http://localhost:' + port + '/';
+    port = process.env.PORT || 7860;
+
+let url = 'http://localhost:' + port + '/';
     
 // Can access environment variables from process.env
 if(process.env.SPACE_ID) {
